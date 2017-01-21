@@ -2,8 +2,8 @@
 # Created by https://www.gitignore.io/api/bower,node,git
 
 ### Generated files ###
-css/
-js/
+/css/
+/js/
 
 ### Bower ###
 bower_components
