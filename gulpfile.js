@@ -10,7 +10,7 @@ var purify = require('gulp-purifycss');
 
 // Task to compile scss into a prefixed css file with watcher
 gulp.task('sass', function() {
-  return gulp.src('./src/scss/*.scss')
+  return gulp.src('./resources/scss/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer('last 5 version'))
     .pipe(sourcemaps.init())
@@ -21,7 +21,7 @@ gulp.task('sass', function() {
 
 // Task to compress js into a babel version of the main.js file with watcher
 gulp.task('uglify', function() {
-  return gulp.src('./src/js/*.js')
+  return gulp.src('./resources/js/*.js')
     .pipe(uglify())
     .pipe(gulp.dest('./js/'));
 });
@@ -34,7 +34,7 @@ gulp.task('serve', function () {
     }
   });
 
-  gulp.watch(['./src/scss/*.scss', './src/scss/*/*.scss'], ['sass']);
+  gulp.watch(['./resources/scss/*.scss', './resources/scss/*/*.scss'], ['sass']);
   gulp.watch('./js/*.js').on('change', browserSync.reload);
   gulp.watch('./*.html').on('change', browserSync.reload);
 });
