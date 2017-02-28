@@ -1,57 +1,33 @@
-var gulp = require('gulp');
-var nano = require('gulp-cssnano');
-var autoprefixer = require('gulp-autoprefixer');
-var sourcemaps = require('gulp-sourcemaps');
-var sass = require('gulp-sass');
-var uglify = require('gulp-uglify');
-var browserSync = require('browser-sync');
-var shorthand = require('gulp-shorthand');
-var purify = require('gulp-purifycss');
+const gulp = require('gulp')
+const sass = require('gulp-sass')
+const live = require('browser-sync').create()
+const pcss = require('gulp-autoprefixer')
+const babel = require('gulp-babel')
+const uglify = require('gulp-uglify')
 
-// Task to compile scss into a prefixed css file with watcher
-gulp.task('sass', function() {
+gulp.task('sass', () => {
   return gulp.src('./resources/scss/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer('last 5 version'))
-    .pipe(sourcemaps.init())
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./css/'))
-    .pipe(browserSync.stream());
-});
-
-// Task to compress js into a babel version of the main.js file with watcher
-gulp.task('uglify', function() {
-  return gulp.src('./resources/js/*.js')
-    .pipe(uglify())
-    .pipe(gulp.dest('./js/'));
-});
-
-// Server mount and behaviour
-gulp.task('serve', function () {
-  browserSync.init({
-    server: {
-      baseDir: './'
-    }
-  });
-
-  gulp.watch(['./resources/scss/*.scss', './resources/scss/*/*.scss'], ['sass']);
-  gulp.watch('./js/*.js').on('change', browserSync.reload);
-  gulp.watch('./*.html').on('change', browserSync.reload);
-});
-
-// CSS Shorthand task
-gulp.task('shorthand', function() {
-  return gulp.src('./css/*.css')
-    .pipe(shorthand())
-    .pipe(gulp.dest('./css/'));
+    .pipe(sass())
+    .pipe(pcss('last 10 version'))
+    .pipe(gulp.dest('./assets/css/'))
+    .pipe(live.stream())
 })
 
-// Purifycss task
-gulp.task('removecss', function() {
-  return gulp.src('./css/app.css')
-    .pipe(purify(['./*.html', './js/*.js']))
-    .pipe(gulp.dest('./css/'));
-});
+gulp.task('babel', () => {
+  gulp.src('./resources/js/main.js')
+    .pipe(babel())
+    .pipe(uglify())
+    .pipe(gulp.dest('./assets/js/'));
+})
 
-// Task to use on development
-gulp.task('default', ['sass', 'uglify','serve']);
+gulp.task('server', () => {
+  live.init({
+    server: {
+      baseDir: __dirname
+    }
+  })
+
+  gulp.watch(['./resources/scss/*.scss', './resources/scss/components/*.scss'], ['sass'])
+  gulp.watch('./resources/js/*.js').on('change', live.reload)
+  gulp.watch('./*.html').on('change', live.reload)
+})
