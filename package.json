@@ -4,7 +4,7 @@
   "description": "Hopi for frontend begginers",
   "main": "gulpfile.js",
   "scripts": {
-    "dev": "gulp uglify && gulp sass && gulp server"
+    "dev": "gulp babel && gulp sass && gulp server"
   },
   "author": "\"Victor Avelar\"",
   "license": "MIT",
