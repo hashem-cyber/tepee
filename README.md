@@ -9,7 +9,9 @@ This text assumes you have installed the CLI.
 1. For initialize, a fresh stack use the following command
 
 ```
-$ hopi init tepee <your project name>
+
+hopi init tepee <your project name>
+
 ```
 
 If you want to automatically install the npm or yarn dependencies you can use the `-d | --dependencies` flag for npm or `-y | --yarn` flag for yarn at the end of the statement.
@@ -27,7 +29,9 @@ Tepee assumes you have a basic understanding of the following tools:
 Once all the dependencies have been installed you just have to run the npm script on the terminal inside the project's folder:
 
 ```
+
 npm run dev
+
 ```
 
 This will provide you the following:
