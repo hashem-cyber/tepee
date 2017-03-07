@@ -27,7 +27,7 @@ gulp.task('server', () => {
     }
   })
 
-  gulp.watch(['./resources/scss/*.scss', './resources/scss/components/*.scss'], ['sass'])
+  gulp.watch(['./resources/scss/*.scss', './resources/scss/**/*.scss'], ['sass'])
   gulp.watch('./resources/js/*.js').on('change', live.reload)
   gulp.watch('./*.html').on('change', live.reload)
 })
