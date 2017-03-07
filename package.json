@@ -1,7 +1,7 @@
 {
   "name": "tepee",
   "version": "1.0.0",
-  "description": "Hopi for frontend begginers",
+  "description": "Automation for frontend begginers",
   "main": "gulpfile.js",
   "scripts": {
     "dev": "gulp babel && gulp sass && gulp server"
