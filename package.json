@@ -4,7 +4,7 @@
   "description": "Automation for frontend beginners",
   "main": "gulpfile.js",
   "scripts": {
-    "dev": "gulp babel && gulp sass && gulp server"
+    "dev": "gulp babel sass server"
   },
   "author": "\"Victor Avelar\"",
   "license": "MIT",
